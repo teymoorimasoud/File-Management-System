@@ -6,27 +6,20 @@ namespace FSSimpleLib
 {
     public class Folder:FileSystemElement
     {
-
-        public List<FileSystemElement> children { get; }
-
-        public void AddFolder(string name, string creator)
+        public Folder(string name,string creator):base(name,creator)
         {
-            children.Add(new Folder
-            {
-                CreateDate = DateTime.Now,
-                Creator = creator
-            });
         }
 
-        public void AddFile(string name, string creator,decimal size, string format)
+        private List<FileSystemElement> children { get; set; }
+
+        public void Add(string name, string creator)
         {
-            children.Add(new File
-            {
-                CreateDate = DateTime.Now,
-                Creator = creator,
-                Size = size,
-                Frotmat = format
-            });
+            children.Add(new Folder(name, creator));
+        }
+
+        public void Add(string name, string creator, string format,decimal size)
+        {
+            children.Add(new File(name,creator,format,size));
         }
 
         public override decimal GetSize()

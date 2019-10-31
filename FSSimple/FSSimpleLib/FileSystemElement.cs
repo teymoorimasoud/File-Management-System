@@ -8,10 +8,17 @@ namespace FSSimpleLib
 {
     public abstract class FileSystemElement
     {
-        public string Name { get; set; }
-        public string Creator { get; set; }
-        public DateTime CreateDate { get; set; }
-        public bool IsDeleted { get; set; }
+        public FileSystemElement(string name,string creator)
+        {
+            Name = name;
+            Creator = creator;
+            CreateDate = DateTime.Now;
+        }
+
+        private string Name { get; set; }
+        private string Creator { get; set; }
+        private DateTime CreateDate { get; set; }
+        public bool IsDeleted { get;private set; }
 
         public void Rename(FileSystemElement fileSystemElement, string name)
         {
