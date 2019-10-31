@@ -7,12 +7,11 @@ namespace FSSimpleLib
     public class Folder:FileSystemElement
     {
 
-        public List<Folder> SubFolders { get; }
-        public List<File> Files { get; }
+        public List<FileSystemElement> children { get; }
 
         public void AddFolder(string name, string creator)
         {
-            SubFolders.Add(new Folder
+            children.Add(new Folder
             {
                 CreateDate = DateTime.Now,
                 Creator = creator
@@ -21,7 +20,7 @@ namespace FSSimpleLib
 
         public void AddFile(string name, string creator,decimal size, string format)
         {
-            Files.Add(new File
+            children.Add(new File
             {
                 CreateDate = DateTime.Now,
                 Creator = creator,
@@ -33,14 +32,10 @@ namespace FSSimpleLib
         public override decimal GetSize()
         {
             decimal size = 0;
-            foreach (var subFolder in SubFolders.Where(x=>!x.IsDeleted))
-            {
+
+            foreach (var subFolder in children.Where(x=>!x.IsDeleted))
                 size += subFolder.GetSize();
-            }
-            foreach (var file in Files.Where(x=>!x.IsDeleted))
-            {
-                size += file.GetSize();
-            }
+          
             return size;
         }
     }
