@@ -31,7 +31,7 @@ namespace FSSimple
         {
             var parentNode = tvDocs.SelectedNode == null ? tvDocs.Nodes : tvDocs.SelectedNode.Nodes;
             var parentFolder = (Folder) tvDocs.SelectedNode?.Tag ?? rootFolder;
-            newFolder.Add(txtDocName.Text, parentFolder);
+            AddFolder(txtDocName.Text, parentFolder, parentNode);
         } 
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -41,11 +41,12 @@ namespace FSSimple
             AddFile(txtDocName.Text, parentFolder, parentNode);
         }
 
-        private Folder Add(string folderName, Folder parentFolder, TreeNodeCollection parentNode)
+        private Folder AddFolder(string folderName, Folder parentFolder, TreeNodeCollection parentNode)
         {
+
             Folder F = new Folder(folderName);
             F.ParentFolder = parentFolder;
-
+            AddItem()
             var node = parentNode.Add(folderName);
             node.ImageIndex = (int) DocumentImageIndex.Folder;
             node.SelectedImageIndex = node.ImageIndex;

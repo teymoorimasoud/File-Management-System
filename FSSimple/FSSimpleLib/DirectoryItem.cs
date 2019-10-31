@@ -8,6 +8,7 @@ namespace FSSimpleLib
 {
     public abstract class DirectoryItem
     {
+
         enum DocumentImageIndex
         {
             Folder,
@@ -15,20 +16,17 @@ namespace FSSimpleLib
         }
 
         private string _Name;
-     
-        private DirectoryItem _ParentDirectoryItem;
         private int _Size { get; set; }
-
         private string _Format { get; set; }
         public DateTime _CreateDate { get; set; }
+        private DirectoryItem _ParentDirectoryItem;
+        public string Path { get; set; }
 
         public DirectoryItem(string name)
         {
             this.Name = name;
             SubDirectoryItems = new List<DirectoryItem>();
-           
-
-        }   
+        }
 
         public string Name
         {
@@ -49,7 +47,7 @@ namespace FSSimpleLib
                 _Name = value;
             }
         }
-        public string Path { get; set; }
+
         public DirectoryItem ParentDirectoryItem
         {
             get => _ParentDirectoryItem;
@@ -62,12 +60,22 @@ namespace FSSimpleLib
         public List<DirectoryItem> SubDirectoryItems { get; }
 
 
-
-       
-        public virtual void Add()
+        public virtual DirectoryItem AddF(string folderName, Folder parentFolder)
+        {
+            return ParentDirectoryItem;
+        }
+        public virtual void Remove()
         {
 
         }
-        
+        public virtual void Rename()
+        {
+
+        }
+        public virtual void CalculateSize()
+        {
+
+        }
+
     }
 }
