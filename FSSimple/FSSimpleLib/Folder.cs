@@ -1,63 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Windows.Forms;
+using System.Linq;
 
 namespace FSSimpleLib
 {
-    public class Folder
+    public class Folder:FileSystemElement
     {
-        //private string _Name;
-        private Folder _ParentFolder;
-        enum DocumentImageIndex
-        {
-            Folder,
-            File
-        }
-        public Folder(string name)
-
-        {
-            // this.Name = name;
-            SubFolders = new List<Folder>();
-            Files = new List<File>();
-
-        }
-       
-        public string Path { get; set; }
-        public string Name { get; set; }
-        
-
-        public Folder ParentFolder
-        {
-            get => _ParentFolder;
-            set
-            {
-                _ParentFolder = value;
-                _ParentFolder.SubFolders.Add(this);
-            }
-        }
 
         public List<Folder> SubFolders { get; }
         public List<File> Files { get; }
-        //private Folder Add(string folderName, Folder parentFolder, TreeNodeCollection parentNode)
-        //{
-        //    Folder F = new Folder(folderName);
-        //    F.ParentFolder = parentFolder;
 
-        //    var node = parentNode.Add(folderName);
-        //    node.ImageIndex = (int)DocumentImageIndex.Folder;
-        //    node.SelectedImageIndex = node.ImageIndex;
-        //    node.Tag = F;
-
-        //    return F;
-        //}
-
-        public Folder Add(string folderName, Folder parentFolder)
+        public void AddFolder(string name, string creator)
         {
-            Folder F = new Folder(folderName);
-            F.ParentFolder = parentFolder;
-
-            return parentFolder;
+            SubFolders.Add(new Folder
+            {
+                CreateDate = DateTime.Now,
+                Creator = creator
+            });
         }
 
+        public void AddFile(string name, string creator,decimal size, string format)
+        {
+            Files.Add(new File
+            {
+                CreateDate = DateTime.Now,
+                Creator = creator,
+                Size = size,
+                Frotmat = format
+            });
+        }
+
+        public override decimal GetSize()
+        {
+            decimal size = 0;
+            foreach (var subFolder in SubFolders.Where(x=>!x.IsDeleted))
+            {
+                size += subFolder.GetSize();
+            }
+            foreach (var file in Files.Where(x=>!x.IsDeleted))
+            {
+                size += file.GetSize();
+            }
+            return size;
+        }
     }
 }

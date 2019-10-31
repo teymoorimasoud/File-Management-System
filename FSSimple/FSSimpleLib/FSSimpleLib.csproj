@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectoryItem.cs" />
+    <Compile Include="FileSystemElement.cs" />
     <Compile Include="File.cs" />
     <Compile Include="Folder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
