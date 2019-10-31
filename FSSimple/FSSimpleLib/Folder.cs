@@ -56,13 +56,7 @@ namespace FSSimpleLib
             Folder F = new Folder(folderName);
             F.ParentFolder = parentFolder;
 
-            var node = parentNode.Add(folderName);
-            node.ImageIndex = (int)DocumentImageIndex.Folder;
-            node.SelectedImageIndex = node.ImageIndex;
-            node.Tag = F;
-
             return parentFolder;
-            //}
         }
 
     }
