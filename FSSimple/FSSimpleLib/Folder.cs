@@ -12,14 +12,26 @@ namespace FSSimpleLib
 
         private List<FileSystemElement> children { get; set; }
 
-        public void Add(string name, string creator)
+        public string Add(string name, string creator)
         {
-            children.Add(new Folder(name, creator));
+            var folderHasExist = children.Any(x => x.GetType() == typeof(Folder) && x.Name == name);
+            if (folderHasExist)
+                return "Folder Has Exist";
+
+                children.Add(new Folder(name, creator));
+
+            return string.Empty;
         }
 
-        public void Add(string name, string creator, string format,decimal size)
+        public string Add(string name, string creator, string format,decimal size)
         {
+            var folderHasExist = children.Any(x => x.GetType() == typeof(File) && x.Name == name );//&& x.format == format
+            if (folderHasExist)
+                return "File Has Exist";
+
             children.Add(new File(name,creator,format,size));
+
+            return string.Empty;
         }
 
         public override decimal GetSize()

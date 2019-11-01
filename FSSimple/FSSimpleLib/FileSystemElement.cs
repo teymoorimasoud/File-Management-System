@@ -15,11 +15,11 @@ namespace FSSimpleLib
             CreateDate = DateTime.Now;
         }
 
-        private string Name { get; set; }
+        public string Name { get; private set; }
         private string Creator { get; set; }
         private DateTime CreateDate { get; set; }
-        public bool IsDeleted { get;private set; }
-
+        public bool IsDeleted { get; private set; }
+        
         public void Rename(FileSystemElement fileSystemElement, string name)
         {
             fileSystemElement.Name = name;
