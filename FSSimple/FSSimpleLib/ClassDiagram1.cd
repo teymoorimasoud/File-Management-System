@@ -3,7 +3,7 @@
   <Class Name="FSSimpleLib.Folder">
     <Position X="3.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAIAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Folder.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="FSSimpleLib.File">
-    <Position X="8" Y="4" Width="1.5" />
+    <Position X="8" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgACAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>File.cs</FileName>
