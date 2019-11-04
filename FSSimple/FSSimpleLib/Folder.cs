@@ -1,69 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Windows.Forms;
+using System.Linq;
 
 namespace FSSimpleLib
 {
-    public class Folder
+    public class Folder:FileSystemElement
     {
-        //private string _Name;
-        private Folder _ParentFolder;
-        enum DocumentImageIndex
+        public Folder(string name,string creator):base(name,creator)
         {
-            Folder,
-            File
-        }
-        public Folder(string name)
-
-        {
-            // this.Name = name;
-            SubFolders = new List<Folder>();
-            Files = new List<File>();
-
-        }
-       
-        public string Path { get; set; }
-        public string Name { get; set; }
-        
-
-        public Folder ParentFolder
-        {
-            get => _ParentFolder;
-            set
-            {
-                _ParentFolder = value;
-                _ParentFolder.SubFolders.Add(this);
-            }
         }
 
-        public List<Folder> SubFolders { get; }
-        public List<File> Files { get; }
-        //private Folder Add(string folderName, Folder parentFolder, TreeNodeCollection parentNode)
-        //{
-        //    Folder F = new Folder(folderName);
-        //    F.ParentFolder = parentFolder;
+        private List<FileSystemElement> children { get; set; }
 
-        //    var node = parentNode.Add(folderName);
-        //    node.ImageIndex = (int)DocumentImageIndex.Folder;
-        //    node.SelectedImageIndex = node.ImageIndex;
-        //    node.Tag = F;
-
-        //    return F;
-        //}
-
-        public Folder Add(string folderName, Folder parentFolder)
+        public string Add(string name, string creator)
         {
-            Folder F = new Folder(folderName);
-            F.ParentFolder = parentFolder;
+            var folderHasExist = children.Any(x => x.GetType() == typeof(Folder) && x.Name == name);
+            if (folderHasExist)
+                return "Folder Has Exist";
 
-            var node = parentNode.Add(folderName);
-            node.ImageIndex = (int)DocumentImageIndex.Folder;
-            node.SelectedImageIndex = node.ImageIndex;
-            node.Tag = F;
+                children.Add(new Folder(name, creator));
 
-            return parentFolder;
-            //}
+            return string.Empty;
         }
 
+        public string Add(string name, string creator, string format,decimal size)
+        {
+            var folderHasExist = children.Any(x => x.GetType() == typeof(File) && x.Name == name );//&& x.format == format
+            if (folderHasExist)
+                return "File Has Exist";
+
+            children.Add(new File(name,creator,format,size));
+
+            return string.Empty;
+        }
+
+        public override decimal GetSize()
+        {
+            decimal size = 0;
+
+            foreach (var subFolder in children.Where(x=>!x.IsDeleted))
+                size += subFolder.GetSize();
+          
+            return size;
+        }
     }
 }

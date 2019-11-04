@@ -1,31 +1,19 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace FSSimpleLib
 {
-    public class File : DirectoryItem
+    public class File : FileSystemElement
     {
-       
-        private Folder _ParentFolder;
-      
-        public new string Path { get; set; }
-        public Folder ParentFolder
-            {
-                get => _ParentFolder;
-                set
-                {
-                    _ParentFolder = value;
-                    _ParentFolder.Files.Add(this);
-                }
-            }
-
-        public File(string name): base(name) 
+        public File(string name, string creator,string format,decimal size) : base(name, creator)
         {
-            this.Name = name;
+            Format = format;
+            Size = size;
+        }
+        private string Format { get; set; }
+        private decimal Size { get; set; }
 
+        public override decimal GetSize()
+        {
+            return Size;
         }
     }
 }

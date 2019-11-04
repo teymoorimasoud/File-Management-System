@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSSimpleLib", "FSSimpleLib\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSSimpleClient", "FSSimpleClient\FSSimpleClient.csproj", "{7D0C1AFE-EE2E-4721-B19B-04891207DF9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSSTest", "FSSTest\FSSTest.csproj", "{22F04D69-36F7-4016-BF41-8A5B323A701A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7D0C1AFE-EE2E-4721-B19B-04891207DF9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D0C1AFE-EE2E-4721-B19B-04891207DF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D0C1AFE-EE2E-4721-B19B-04891207DF9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F04D69-36F7-4016-BF41-8A5B323A701A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F04D69-36F7-4016-BF41-8A5B323A701A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F04D69-36F7-4016-BF41-8A5B323A701A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F04D69-36F7-4016-BF41-8A5B323A701A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
