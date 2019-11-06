@@ -8,6 +8,8 @@ namespace FSSimpleLib
 {
     public abstract class FileSystemElement
     {
+       
+
         public FileSystemElement(string name,string creator)
         {
             Name = name;
@@ -16,22 +18,25 @@ namespace FSSimpleLib
         }
 
         public string Name { get; private set; }
-        private string Creator { get; set; }
+        private string Creator {get; set; }
+        private decimal Size
+        {
+            get
+            {
+                return GetSize();
+            }
+        }
+
         private DateTime CreateDate { get; set; }
-        public bool IsDeleted { get; private set; }
         
         public void Rename(FileSystemElement fileSystemElement, string name)
         {
             fileSystemElement.Name = name;
         }
 
-        public void delete()
-        {
-            IsDeleted = true;
-        }
+        public abstract void Delete();       
 
         public abstract decimal GetSize();
-        
-
     }
 }
+  
