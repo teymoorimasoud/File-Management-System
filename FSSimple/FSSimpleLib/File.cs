@@ -9,8 +9,8 @@ namespace FSSimpleLib
             Format = format;
             Size = size;
         } 
-        private string Format { get; set; }
-        private decimal Size { get; set; }
+        public string Format { get; set; }
+        public decimal Size { get; set; }
 
         public override void Delete()
         {

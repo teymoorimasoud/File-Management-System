@@ -76,24 +76,31 @@ namespace FSSimpleClient
 
             foreach (var folder in parentFolder.Folders)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 TraverseFolder(folder, level + 1);
+                Console.ResetColor();
             }
             foreach (var file in parentFolder.Files)
             {
-                AddNodeText(file.Name, level + 1);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                AddNodeText(file.Name +"."+ file.Format, level + 1);
+                Console.ResetColor();
             }
         }
         private void AddNodeText(string text, int level)
         {
+            
             string spaces = "";
             string lines = "";
             if (level > 0)
             {
+               
                 spaces = new String(' ', (level - 1) * 4);
                 lines = "|___";
+              
             }
             Console.Write(spaces + lines + text + Environment.NewLine);
-        }
+           }
 
         public void Go4Delete()
         {
