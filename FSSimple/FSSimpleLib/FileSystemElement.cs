@@ -17,13 +17,33 @@ namespace FSSimpleLib
             CreateDate = DateTime.Now;
         }
 
-        public string Name { get; private set; }
+        private string _Name;
         private string Creator {get; set; }
         private decimal Size
         {
             get
             {
                 return GetSize();
+            }
+        }
+
+        public string Name
+        {
+            get => _Name;
+            set
+            {
+                if ((value.Trim() == "") ||
+                    (value.Contains("//")) ||
+                    (value.Contains("\\")) ||
+                    (value.Contains(":")) ||
+                    (value.Contains("*")) ||
+                    (value.Contains("?")) ||
+                    (value.Contains(">")) ||
+                    (value.Contains("<")) ||
+                    (value.Contains("|")) ||
+                    (value.Contains("/")))
+                    throw new Exception("Folder or File Name is Invalid!");
+                _Name = value;
             }
         }
 
