@@ -52,8 +52,7 @@ namespace FSSimpleClient
 
             File file = new File(fileName, creator, format, size);
             Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
-            decimal ssize = file.GetSize();
-            Console.WriteLine(size);
+         
 
             try
             {
@@ -117,7 +116,16 @@ namespace FSSimpleClient
             Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
             Console.WriteLine(parentFolder.GetSize());
         }
-        
+
+        public void Go4GetRename()
+        {
+            Console.Write("Path:");
+            string path = Console.ReadLine();
+            Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
+            Console.Write("New Name:");
+            string newName = Console.ReadLine();
+            parentFolder.Rename(parentFolder,newName);
+        }
         //public void Sync()
         //{
         //    SyncDocument(rootFolder, Folder.BasePath);

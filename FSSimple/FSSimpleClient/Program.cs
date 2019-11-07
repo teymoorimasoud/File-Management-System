@@ -17,7 +17,7 @@ namespace Fs.Client
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Document Type(D:Directory,F:File,R:Delete, S:Size, T:Tree, E:Exit):");
+                Console.WriteLine("Document Type(D:Directory,F:File,R:Delete, S:Size,N:Rename T:Tree, E:Exit):");
                 Console.ResetColor();
                 var documetType = Char.ToUpper(Console.ReadKey().KeyChar);
                 Console.SetCursorPosition(0, Console.CursorTop);
@@ -37,6 +37,9 @@ namespace Fs.Client
                         break;
                     case 'S':
                         fileManager.Go4GetSize();
+                        break;
+                    case 'N':
+                        fileManager.Go4GetRename();
                         break;
                     case 'E':
                         Environment.Exit(0);

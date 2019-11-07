@@ -76,6 +76,10 @@ namespace FSSimpleLib
                     
             return size;
         }
+        public void Rename(Folder folder, string name)
+        {
+            folder.Name = name;
+        }
 
         public Folder GetDirectoryFromPath(string path)
         {
