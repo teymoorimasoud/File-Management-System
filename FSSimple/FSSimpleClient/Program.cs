@@ -17,7 +17,7 @@ namespace Fs.Client
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Document Type(D:Directory,F:File,R:Delete, S:Size,N:Rename T:Tree, E:Exit):");
+                Console.WriteLine("Document Type(D:CreateFolder,F:File,R:Delete, S:Size,N:Rename T:Tree, E:Exit):");
                 Console.ResetColor();
                 var documetType = Char.ToUpper(Console.ReadKey().KeyChar);
                 Console.SetCursorPosition(0, Console.CursorTop);

@@ -60,7 +60,8 @@ namespace FSSimpleLib
 
         public override void Delete()
         {
-            Parent.Remove(this);
+            if (Parent != null)
+                Parent.Remove(this);
         }
 
         public override decimal GetSize()
@@ -76,33 +77,19 @@ namespace FSSimpleLib
                     
             return size;
         }
-        public void Rename(Folder folder, string name)
+        
+        public FileSystemElement GetLastElementFromPath(string path)
         {
-            folder.Name = name;
-        }
-
-        public Folder GetDirectoryFromPath(string path)
-        {
-            //""
             if (path == "")
                 return this;
-            //"reza"
-            int speratorIndex = path.IndexOf("\\");
-            string parentDirName;
-            if (speratorIndex == -1)
-                parentDirName = path;
-            else
-                parentDirName = path.Substring(0, speratorIndex);
-            Folder parentDir = Folders.FirstOrDefault(x => x.Name == parentDirName);
-            if (parentDir is null)
-                throw new Exception(string.Format("There is no {0} Directory in {1}", parentDirName, this.Name));
 
-            string subPath;
-            if (speratorIndex == -1)
-                subPath = "";
-            else
-                subPath = path.Substring(speratorIndex + 1 , path.Length - speratorIndex - 1);
-            return parentDir.GetDirectoryFromPath(subPath);
+            var parentsName = path.Split('\\');
+
+            var parentDir = Items.FirstOrDefault(x => x.Name == parentsName[parentsName.Length - 1]);
+            if (parentDir is null)
+                throw new Exception(string.Format("There is no {0} Directory in {1}", parentsName[parentsName.Length - 1], this.Name));
+
+            return parentDir;
 
         }
     }

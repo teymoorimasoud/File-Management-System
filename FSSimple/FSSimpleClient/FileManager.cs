@@ -22,7 +22,7 @@ namespace FSSimpleClient
 
 
             Folder folder = new Folder(folderName, creator);
-            Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
+            Folder parentFolder = (Folder)rootFolder.GetLastElementFromPath(path);
             try
             {
                 parentFolder.AddFolder(folder);
@@ -51,7 +51,7 @@ namespace FSSimpleClient
 
 
             File file = new File(fileName, creator, format, size);
-            Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
+            Folder parentFolder = (Folder)rootFolder.GetLastElementFromPath(path);
          
 
             try
@@ -105,47 +105,28 @@ namespace FSSimpleClient
         {
             Console.Write("Path:");
             string path = Console.ReadLine();
-            Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
-            parentFolder.Delete();
+            var element = rootFolder.GetLastElementFromPath(path);
+            element.Delete();
 
         }
         public void Go4GetSize()
         {
             Console.Write("Path:");
             string path = Console.ReadLine();
-            Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
-            Console.WriteLine(parentFolder.GetSize());
+            var element = rootFolder.GetLastElementFromPath(path);
+            Console.WriteLine(element.GetSize());
         }
 
         public void Go4GetRename()
         {
             Console.Write("Path:");
             string path = Console.ReadLine();
-            Folder parentFolder = rootFolder.GetDirectoryFromPath(path);
+            var element = rootFolder.GetLastElementFromPath(path);
             Console.Write("New Name:");
             string newName = Console.ReadLine();
-            parentFolder.Rename(parentFolder,newName);
+            element.Rename(newName);
         }
-        //public void Sync()
-        //{
-        //    SyncDocument(rootFolder, Folder.BasePath);
-        //    SyncDocument(rootFolder, "//");
-
-        //}
-        //public void SyncDocument(Folder folder, string currentPath)
-        //{
-        //    Directory.CreateDirectory(currentPath + "\\" + folder.Name);
-
-        //    foreach (var f in fileSystemElement.SubElement)
-        //    {
-        //        SyncDocument(f, currentPath + "\\" + folder.Name);
-        //    }
-
-        //    foreach (var f in folder.)
-        //    {
-        //        System.IO.File.Create(currentPath + "\\" + folder.Name + "\\" + f.Name);
-        //    }
-        //}
+        
 
 
 

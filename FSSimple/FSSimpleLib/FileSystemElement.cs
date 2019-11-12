@@ -49,9 +49,9 @@ namespace FSSimpleLib
 
         private DateTime CreateDate { get; set; }
         
-        public void Rename(FileSystemElement fileSystemElement, string name)
+        public void Rename(string name)
         {
-            fileSystemElement.Name = name;
+            Name = name;
         }
 
         public abstract void Delete();       
