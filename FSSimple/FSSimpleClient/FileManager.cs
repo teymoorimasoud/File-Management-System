@@ -13,7 +13,7 @@ namespace FSSimpleClient
         private List<FileSystemElement> _fileSystemElements = new List<FileSystemElement>();
         public void Go4CreateFolder()
         {
-            Console.Write("Parent Directory:");
+            Console.Write("Parent Directory Folder:");
             string path = Console.ReadLine();
             Console.Write("Folder Name:");
             string folderName = Console.ReadLine();
@@ -37,7 +37,7 @@ namespace FSSimpleClient
        
         public void Go4CreateFile()
         {
-            Console.Write("Parent Directory:");
+            Console.Write("Parent Directory File:");
             string path = Console.ReadLine();
             Console.Write("File Name:");
             string fileName = Console.ReadLine();

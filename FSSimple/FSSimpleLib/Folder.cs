@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace FSSimpleLib
 {
-    public class Folder:FileSystemElement
+    public class Folder : FileSystemElement
     {
-        public Folder Parent{ get; set; }
+        public Folder Parent { get; set; }
 
         private List<FileSystemElement> Items { get; set; }
-        
+
         public List<File> Files
         {
             get { return Items.FindAll(x => x.GetType() == typeof(File)).ConvertAll(x => (File)x); }
@@ -22,14 +22,14 @@ namespace FSSimpleLib
             get { return Items.FindAll(x => x.GetType() == typeof(Folder)).ConvertAll(x => (Folder)x); }
         }
 
-        public Folder(string name,string creator):base(name,creator)
+        public Folder(string name, string creator) : base(name, creator)
         {
             Items = new List<FileSystemElement>();
         }
 
         public void AddFile(File file)
         {
-            if (Items.Any(x=>x.GetType() == typeof(File) && x.Name == file.Name))
+            if (Items.Any(x => x.GetType() == typeof(File) && x.Name == file.Name))
                 throw new Exception("File Has Exists");
 
             Items.Add(file);
@@ -59,27 +59,48 @@ namespace FSSimpleLib
         {
             decimal size = 0;
 
-            
+
             foreach (var item in Items)
                 size += item.GetSize();
-                    
+
             return size;
         }
-        
+
         public FileSystemElement GetLastElementFromPath(string path)
         {
             if (path == "")
                 return this;
 
-            var parentsName = path.Split('\\');
+            int speratorIndex = path.IndexOf("\\");
+            string lastElement;
+            if (speratorIndex == -1)
+                lastElement = path;
+            else
+                lastElement = path.Substring(0, speratorIndex);
 
-            var parentDir = Items.FirstOrDefault(x => x.Name == parentsName[parentsName.Length - 1]);
+            if (lastElement.IndexOf('.') == -1)
 
-            if (parentDir is null)
-                throw new Exception(string.Format("There is no {0} Directory in {1}", parentsName[parentsName.Length - 1], this.Name));
+            {
+                Folder parentDir = Folders.FirstOrDefault(x => x.Name == lastElement);
+                if (parentDir is null)
+                    throw new Exception(string.Format("There is no {0} Directory in {1}", lastElement, this.Name));
+                string subPath;
+                if (speratorIndex == -1)
+                    subPath = "";
+                else
+                    subPath = path.Substring(speratorIndex + 1, path.Length - speratorIndex - 1);
+                return parentDir.GetLastElementFromPath(subPath);
+            }
+            else
+            {
+                var fileArry = path.Split('.');
+                var file = Files.FirstOrDefault(x => x.Name == fileArry[0] && x.Format == fileArry[1]);
 
-            return parentDir;
+                if (file is null)
+                    throw new Exception(string.Format("There is no {0} Directory in {1}", lastElement, this.Name));
 
+                return file;
+            }
         }
     }
 }
