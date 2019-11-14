@@ -53,6 +53,7 @@ namespace FSSimpleLib
         {
             Name = name;
         }
+        
 
         public abstract void Delete();       
 

@@ -10,12 +10,8 @@ namespace FSSimpleLib
     {
         public Folder Parent{ get; set; }
 
-        private List<FileSystemElement> _Items;
-        public List<FileSystemElement> Items
-        {
-            get { return _Items; }
-        }
-
+        private List<FileSystemElement> Items { get; set; }
+        
         public List<File> Files
         {
             get { return Items.FindAll(x => x.GetType() == typeof(File)).ConvertAll(x => (File)x); }
@@ -23,32 +19,27 @@ namespace FSSimpleLib
 
         public List<Folder> Folders
         {
-            
             get { return Items.FindAll(x => x.GetType() == typeof(Folder)).ConvertAll(x => (Folder)x); }
         }
 
         public Folder(string name,string creator):base(name,creator)
         {
-            _Items = new List<FileSystemElement>();
-        }
-
-
-        private bool ElementExists(FileSystemElement element)
-        {
-            return Items.Any(x => x.Name == element.Name);
+            Items = new List<FileSystemElement>();
         }
 
         public void AddFile(File file)
         {
-            if (ElementExists(file))
+            if (Items.Any(x=>x.GetType() == typeof(File) && x.Name == file.Name))
                 throw new Exception("File Has Exists");
+
             Items.Add(file);
             file.Parent = this;
         }
         public void AddFolder(Folder folder)
         {
-            if (ElementExists(folder))
+            if (Items.Any(x => x.GetType() == typeof(Folder) && x.Name == folder.Name))
                 throw new Exception("Folder Has Exists");
+
             Items.Add(folder);
             folder.Parent = this;
         }
@@ -70,10 +61,7 @@ namespace FSSimpleLib
 
             
             foreach (var item in Items)
-            {
                 size += item.GetSize();
-
-            }
                     
             return size;
         }
@@ -86,6 +74,7 @@ namespace FSSimpleLib
             var parentsName = path.Split('\\');
 
             var parentDir = Items.FirstOrDefault(x => x.Name == parentsName[parentsName.Length - 1]);
+
             if (parentDir is null)
                 throw new Exception(string.Format("There is no {0} Directory in {1}", parentsName[parentsName.Length - 1], this.Name));
 

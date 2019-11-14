@@ -17,30 +17,30 @@ namespace Fs.Client
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Document Type(D:CreateFolder,F:File,R:Delete, S:Size,N:Rename T:Tree, E:Exit):");
+                Console.WriteLine("(C:CreateFolder, F:AddFile, D:Delete, S:Size, R:Rename, T:Tree, E:Exit):");
                 Console.ResetColor();
                 var documetType = Char.ToUpper(Console.ReadKey().KeyChar);
                 Console.SetCursorPosition(0, Console.CursorTop);
                 switch (documetType)
                 {
-                    case 'D':
+                    case 'C':
                         fileManager.Go4CreateFolder();
                         break;
                     case 'F':
                         fileManager.Go4CreateFile();
                         break;
-                    case 'R':
+                    case 'D':
                         fileManager.Go4Delete();
-                        break;
-                    case 'T':
-                        fileManager.ShowTree();
                         break;
                     case 'S':
                         fileManager.Go4GetSize();
                         break;
-                    case 'N':
+                    case 'R':
                         fileManager.Go4GetRename();
                         break;
+                    case 'T':
+                        fileManager.ShowTree();
+                        break;                                    
                     case 'E':
                         Environment.Exit(0);
                         break;
